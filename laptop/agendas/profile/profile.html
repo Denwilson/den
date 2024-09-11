@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .profile-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .profile-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Profile Page Container -->
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <form id="profileForm">
+            <div class="mb-3 text-center">
+                <img id="profilePicture" src="default-profile.png" alt="Profile Picture">
+                <div class="mt-2">
+                    <input type="file" id="pictureInput" accept="image/*" class="form-control-file">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="profileName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="profileName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="profileBio" class="form-label">Bio</label>
+                <textarea class="form-control" id="profileBio" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="profileLocation" class="form-label">Location</label>
+                <input type="text" class="form-control" id="profileLocation" required>
+            </div>
+
+            <div class="form-group">
+                <label for="profileContact" class="form-label">Contact Information</label>
+                <input type="text" class="form-control" id="profileContact" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved profile data from localStorage
+            const profilePicture = localStorage.getItem('profilePicture');
+            const profileName = localStorage.getItem('profileName');
+            const profileBio = localStorage.getItem('profileBio');
+            const profileLocation = localStorage.getItem('profileLocation');
+            const profileContact = localStorage.getItem('profileContact');
+
+            if (profilePicture) {
+                document.getElementById('profilePicture').src = profilePicture;
+            }
+            if (profileName) {
+                document.getElementById('profileName').value = profileName;
+            }
+            if (profileBio) {
+                document.getElementById('profileBio').value = profileBio;
+            }
+            if (profileLocation) {
+                document.getElementById('profileLocation').value = profileLocation;
+            }
+            if (profileContact) {
+                document.getElementById('profileContact').value = profileContact;
+            }
+        });
+
+        document.getElementById('pictureInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePicture').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const profilePicture = document.getElementById('profilePicture').src;
+            const profileName = document.getElementById('profileName').value;
+            const profileBio = document.getElementById('profileBio').value;
+            const profileLocation = document.getElementById('profileLocation').value;
+            const profileContact = document.getElementById('profileContact').value;
+
+            localStorage.setItem('profilePicture', profilePicture);
+            localStorage.setItem('profileName', profileName);
+            localStorage.setItem('profileBio', profileBio);
+            localStorage.setItem('profileLocation', profileLocation);
+            localStorage.setItem('profileContact', profileContact);
+
+            alert('Profile updated successfully!');
+        });
+    </script>
+</body>
+</html>

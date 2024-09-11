@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Top Bar Style with Background Image */
+        .top-bar {
+            background-image: url('https://via.placeholder.com/1920x400'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+        .top-bar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.5); /* Add transparency to links for readability */
+        }
+        .top-bar a:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .sticky {
+            background-color: #4CAF50;
+            background-image: none; /* Remove background image on scroll */
+        }
+
+        header {
+            padding-top: 70px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        /* Gallery Style */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(100% - 20px); /* Single column on mobile */
+            max-width: calc(100% - 20px);
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .gallery-item p {
+            margin: 10px 0 0;
+        }
+
+        /* Responsive design for tablets and larger screens */
+        @media(min-width: 600px) {
+            .gallery-item {
+                flex: 1 1 calc(50% - 20px); /* Two columns on tablets */
+                max-width: calc(50% - 20px);
+            }
+        }
+        @media(min-width: 900px) {
+            .gallery-item {
+                flex: 1 1 calc(33.333% - 20px); /* Three columns on larger screens */
+                max-width: calc(33.333% - 20px);
+            }
+        }
+
+        /* Style for Logout Button */
+        #logout-btn {
+            float: right;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #logout-btn:hover {
+            background-color: darkred;
+        }
+
+        .login-form, .register-form {
+            display: none;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .login-form input, .register-form input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        .login-form button, .register-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-form button:hover, .register-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+<link rel="stylesheet"
+href="mystles.css">
+</head>
+<body>
+
+    <!-- Top Bar Navigation with Logout -->
+    <div class="top-bar" id="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#contact">Contact</a>
+        <button id="logout-btn">Logout</button>
+    </div>
+
+    <header id="home">
+        <h1>Welcome to Our Event!</h1>
+    </header>
+
+    <section id="about">
+        <h2>Event Name: Tech Conference 2024</h2>
+        <p>Join us for an exciting day filled with tech talks, workshops, and networking opportunities! Meet industry leaders, discover the latest trends in technology, and connect with like-minded professionals.</p>
+    </section>
+
+    <!-- Login Form -->
+    <div class="login-form" id="loginForm" required>
+        <h2>Login</h2>
+        <input type="text" id="login-username" placeholder="Username" >
+        <input type="password" id="login-password" placeholder="Password"><br>
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <button onclick="showRegisterForm()">Register here</button></p>
+    </div>
+<script src="myscript.js">
+    <!-- Register Form -->
+    <div class="register-form" id="registerForm">
+        <h2>Register</h2>
+        <input type="text" id="register-username" placeholder="Username" /required>
+        <input type="email" id="register-email" placeholder="Email" /required>
+        <input type="password" id="register-password" placeholder="Password" /required>
+        <input type="password" id="register-password" placeholder="Confirm Password" /required><br>
+        <button onclick="register()">Register</button>
+        <p>Already have an account? <button onclick="showLoginForm()">Login here</button></p>
+    </div>
+
+
+    <section class="gallery">
+        <div class="gallery-item">
+            <img src="/storage/emulated/0/DCIM/Camera/IMG_20240602_163514_991_transcpr.jpg" alt="Image 1"> <!-- Replace with your image -->
+            <p>Description for Image 1</p>
+        </div>
+        <div class="gallery-item">
+            <img src="/storage/emulated/0/DCIM/Camera/IMG_20240602_163514_991_transcpr.jpg" alt="Image 2"> <!-- Replace with your image -->
+            <p>Description for Image 2</p>
+        </div>
+        <div class="gallery-item">
+            <img src="/storage/emulated/0/DCIM/Camera/IMG_20240602_163514_991_transcpr.jpg" alt="Image 3"> <!-- Replace with your image -->
+            <p>Description for Image 3</p>
+        </div>
+        <div class="gallery-item">
+            <img src="/storage/emulated/0/DCIM/Camera/IMG_20240602_163514_991_transcpr.jpg" alt="Image 3"> <!-- Replace with your image -->
+            <p>Description for Image 4</p>
+    </section>
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!localStorage.getItem('loggedIn')) {
+                showLoginForm();
+            }
+        });
+
+        // Function to handle login
+        function login() {
+            const username = document.getElementById("login-username").value;
+            const password = document.getElementById("login-password").value;
+
+            // Check if the user is registered
+            const storedUsername = localStorage.getItem('registeredUsername');
+            const storedPassword = localStorage.getItem('registeredPassword');
+
+            if (username === storedUsername && password === storedPassword) {
+                localStorage.setItem('loggedIn', 'false');
+                window.location.reload(); // Reload the page after login
+            } else {
+                alert("Incorrect username or password.");
+            }
+        }
+
+        // Function to handle registration
+        function register() {
+            const username = document.getElementById("register-username").value;
+            const password = document.getElementById("register-password").value;
+
+            if (username && password) {
+                localStorage.setItem('registeredUsername', username);
+                localStorage.setItem('registeredPassword', password);
+                alert("Registration successful! Please log in.");
+                showLoginForm(); // Switch to login form after successful registration
+            } else {
+                alert("Please enter a valid username and password.");
+            }
+        }
+
+        // Function to handle logout
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            localStorage.removeItem('loggedIn');
+            showLoginForm();
+        });
+
+        // Show the login form and hide the rest of the page
+        function showLoginForm() {
+            document.querySelector(".top-bar").style.display = "none";
+            document.querySelector("header").style.display = "none";
+            document.querySelector("section").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("registerForm").style.display = "none";
+        }
+
+        // Show the registration form
+        function showRegisterForm() {
+            document.querySelector(".top-bar").style.display = "none";
+            document.querySelector("header").style.display = "none";
+            document.querySelector("section").style.display = "none";
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "block";
+        }
+
+    </script>
+</body>
+</html>
